@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Schtandart app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Vue.js -->
+  <script src="./lib/vue.min.js"></script>
+  <script src="./lib/vue-router.min.js"></script>
+  <!-- Custom -->
+  <script type="text/javascript">
+    function initializeSqlConnection() {
+
+
+    }
+
+    onDeviceReady: function() {
+      this.receivedEvent('deviceready');
+
+      document.querySelector("#prepare").addEventListener("touchend", function () {
+        window.QRScanner.prepare(onDone); // show the prompt
+
+      });
+
+      document.querySelector("#init").addEventListener("touchend", function () {
+
+        window.SqlServer.init("172.16.0.100", "MSSQLSERVER", "sa", "1qaz@WSX", "DB", function (event) {
+          alert(JSON.stringify(event));
+        }, function (error) {
+          alert(JSON.stringify(error));
+        });
+      });
+
+      document.querySelector("#show").addEventListener("touchend", function () {
+        window.QRScanner.show();
+
+      });
+
+      document.querySelector("#scan").addEventListener("touchend", function () {
+        window.QRScanner.scan(displayContents);
+
+      });
+
+      function onDone(err, status) {
+        if (err) {
+          // here we can handle errors and clean up any loose ends.
+          console.error(err);
+        }
+        if (status.authorized) {
+          // W00t, you have camera access and the scanner is initialized.
+          // QRscanner.show() should feel very fast.
+        } else if (status.denied) {
+          // The video preview will remain black, and scanning is disabled. We can
+          // try to ask the user to change their mind, but we'll have to send them
+          // to their device settings with `QRScanner.openSettings()`.
+        } else {
+          // we didn't get permission, but we didn't get permanently denied. (On
+          // Android, a denial isn't permanent unless the user checks the "Don't
+          // ask again" box.) We can ask again at the next relevant opportunity.
+        }
+      }
+
+      function displayContents(err, text) {
+        if (err) {
+          // an error occurred, or the scan was canceled (error code `6`)
+        } else {
+          // The scan completed, display the contents of the QR code:
+          alert(text);
+        }
+      }
+    },
+  </script>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/index.css" />
+</head>
+
+<body>
+  <a id="init">Init</a>
+  <a id="prepare">QR Scanner</a>
+  <a id="show">QR Show</a>
+  <a id="scan">QR Scan</a>
+  <div id="app">
+    <!-- Вся навигация находится в сайдбаре, auth будет тоже в сайдбаре, следовательно роутерлинки должны быть тоже в сайдбаре -->
+    <router-link style="font-family: sans-serif" to="/">Первая страница</router-link>
+    <router-link style="font-family: sans-serif" to="/demo">Вторая страница</router-link>
+    <br>
+    <router-view></router-view>
+
+
+    <!-- Добавлен сайдбар и кнопки, можно удалить -->
+
+    <body class="padding grey-100 has-header has-sub-header">
+      <div class="menu teal-900 cover blend-multiply" id="menuDiscover" style="background-image:url(/img/nature1.jpg)">
+        <div class="cover align-center">
+          <img class="avatar circle border-white shadow" src="/img/33.jpg">
+          <h1 class="text-teal-300">Konstantin Khlopkov</h1>
+          <p class="text-grey">hlopkov-k@schtandart.com</p>
+        </div>
+        <div class="list no-border">
+          <a class="item space-small">
+            <div class="left">
+              <i class="icon ion-ios-heart-outline grey-300"></i>
+            </div>
+            <h1 class="text-grey-300">ОТК</h1>
+          </a>
+          <a class="item space-small">
+            <div class="left">
+              <i class="icon ion-ios-flame-outline grey-300"></i>
+            </div>
+            <h1 class="text-grey-300">Стеколка</h1>
+            <div class="right">
+              <span class="text-small border-red text-red radius padding">12</span>
+            </div>
+          </a>
+          <a class="item space-small">
+            <div class="left">
+              <i class="icon ion-ios-location-outline grey-300"></i>
+            </div>
+            <h1 class="text-grey-300">Замеры</h1>
+          </a>
+          <a class="item space-small">
+            <div class="left">
+              <i class="icon ion-ios-person-outline grey-300"></i>
+            </div>
+            <h1 class="text-grey-300">Заказы</h1>
+            <div class="right">
+              <span class="text-small border-green text-green radius padding">7</span>
+            </div>
+          </a>
+          <a class="item space-small">
+            <div class="left">
+              <i class="icon ion-ios-chatbubble-outline grey-300"></i>
+            </div>
+            <h1 class="text-grey-300">Чат</h1>
+          </a>
+        </div>
+      </div>
+      <div class="header teal">
+        <div class="left">
+          <button class="icon ion-navicon-round" onclick="openMenu('menuDiscover')"></button>
+        </div>
+        <h1 class="title align-center">Сканер штрихкодов</h1>
+        <div class="right">
+          <span class="icon-badge text-small red radius padding">3</span>
+          <button class="icon ion-earth"></button>
+        </div>
+      </div>
+      <div class="header sub teal">
+        <div class="buttons-group full small">
+          <button class="teal-700 border-teal radius-left">Latests</button>
+          <button class="teal-600 border-teal">Favorites</button>
+          <button class="teal-600 border-teal radius-right">All</button>
+        </div>
+      </div>
+      <div class="space"></div>
+      <!-- Список  -->
+      <div class="list white no-border radius shadow">
+        <div class="item">
+          <div class="left">
+            <img class="avatar radius" src="/img/33.jpg" />
+          </div>
+          <h2 class="strong">Konstantin Khlopkov</h2>
+          <p class="text-red-400">@kokhlo</p>
+          <p class="text-grey">5 минут назад</p>
+          <div class="right">
+            <button class="white icon ion-ios-heart-outline text-red-400"> 23</button>
+          </div>
+        </div>
+        <div class="item full">
+          <img src="/img/nature2.jpg" />
+        </div>
+        <div class="item text-grey-600">
+          <p>
+            Smth text.
+          </p>
+        </div>
+      </div>
+
+      <!-- Конец региона -->
+    </body>
+
+  </div>
+
+  <script src="./js/index.js"></script>
+  <script type="text/javascript" src="mobileui/mobileui.js"></script>
+</body>
+
+</html>
