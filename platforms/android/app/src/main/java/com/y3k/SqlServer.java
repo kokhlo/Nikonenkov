@@ -134,22 +134,15 @@ public class SqlServer extends CordovaPlugin {
                 JSONObject obj = new JSONObject();
                 for (int i = 1; i <= numColumns; i++) {
                     String column_name = rsmd.getColumnName(i);
-                    if (rsmd.getColumnType(i) == 2005) {
-                        obj.put(column_name, rs.getString(column_name));
-                    } else {
-                        obj.put(column_name, rs.getObject(column_name));
-                    }
+                    obj.put(column_name, rs.getObject(column_name));
                 }
                 json.put(obj);
             }
-            JSONArray array = new JSONArray();
-            array.put(json);
-            PluginResult result = new PluginResult(PluginResult.Status.OK, array.toString());
+            PluginResult result = new PluginResult(PluginResult.Status.OK, json);
             callbackContext.sendPluginResult(result);
 
         } catch (Exception ex) {
             PluginResult result = new PluginResult(PluginResult.Status.ERROR, "Error : " + ex.getMessage());
-            callbackContext.sendPluginResult(result);
         } finally {
             try {
                 if (rs != null) {
@@ -193,7 +186,6 @@ public class SqlServer extends CordovaPlugin {
 
         } catch (Exception ex) {
             PluginResult result = new PluginResult(PluginResult.Status.ERROR, "Error : " + ex.getMessage());
-            callbackContext.sendPluginResult(result);
         } finally {
             try {
                 if (rs != null) {

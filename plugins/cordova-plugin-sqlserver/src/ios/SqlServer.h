@@ -11,7 +11,6 @@
 @property(nonatomic, retain) NSString *username;
 @property(nonatomic, retain) NSString *password;
 @property(nonatomic, retain) NSString *database;
-@property(nonatomic) BOOL initialized;
 
 -(void)init:(CDVInvokedUrlCommand *)command;
 -(void)testConnection:(CDVInvokedUrlCommand *)command;

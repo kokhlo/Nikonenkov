@@ -11,80 +11,38 @@
   <script src="./lib/vue.min.js"></script>
   <script src="./lib/vue-router.min.js"></script>
   <!-- Custom -->
+  <script src="cordova.js"></script>
   <script type="text/javascript">
-    function initializeSqlConnection() {
-
-
+    var onDone;
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+      alert('Maybe something went wrong or maybe not 0');
+      window.QRScanner.prepare(onDone);
+      alert('Maybe something went wrong or maybe not 1');
+      SqlServer.init("172.16.0.100", "MSSQLSERVER", "sa", "1qaz@WSX", "schtadart", function (event) {
+        alert(JSON.stringify(event));
+      }, function (error) {
+        alert(JSON.stringify(error));
+      });
+      alert('Maybe something went wrong or maybe not 2');
+      window.SqlServer.testConnection(function (event) {
+        alert(JSON.stringify(event));
+      }, function (error) {
+        alert("Error : " + JSON.stringify(error));
+      });
+      alert('Hurraah!');
     }
 
-    onDeviceReady: function() {
-      this.receivedEvent('deviceready');
-
-      document.querySelector("#prepare").addEventListener("touchend", function () {
-        window.QRScanner.prepare(onDone); // show the prompt
-
-      });
-
-      document.querySelector("#init").addEventListener("touchend", function () {
-
-        window.SqlServer.init("172.16.0.100", "MSSQLSERVER", "sa", "1qaz@WSX", "DB", function (event) {
-          alert(JSON.stringify(event));
-        }, function (error) {
-          alert(JSON.stringify(error));
-        });
-      });
-
-      document.querySelector("#show").addEventListener("touchend", function () {
-        window.QRScanner.show();
-
-      });
-
-      document.querySelector("#scan").addEventListener("touchend", function () {
-        window.QRScanner.scan(displayContents);
-
-      });
-
-      function onDone(err, status) {
-        if (err) {
-          // here we can handle errors and clean up any loose ends.
-          console.error(err);
-        }
-        if (status.authorized) {
-          // W00t, you have camera access and the scanner is initialized.
-          // QRscanner.show() should feel very fast.
-        } else if (status.denied) {
-          // The video preview will remain black, and scanning is disabled. We can
-          // try to ask the user to change their mind, but we'll have to send them
-          // to their device settings with `QRScanner.openSettings()`.
-        } else {
-          // we didn't get permission, but we didn't get permanently denied. (On
-          // Android, a denial isn't permanent unless the user checks the "Don't
-          // ask again" box.) We can ask again at the next relevant opportunity.
-        }
-      }
-
-      function displayContents(err, text) {
-        if (err) {
-          // an error occurred, or the scan was canceled (error code `6`)
-        } else {
-          // The scan completed, display the contents of the QR code:
-          alert(text);
-        }
-      }
-    },
   </script>
   <link rel="stylesheet" type="text/css" media="screen" href="./css/index.css" />
 </head>
 
 <body>
-  <a id="init">Init</a>
-  <a id="prepare">QR Scanner</a>
-  <a id="show">QR Show</a>
-  <a id="scan">QR Scan</a>
+
   <div id="app">
     <!-- Вся навигация находится в сайдбаре, auth будет тоже в сайдбаре, следовательно роутерлинки должны быть тоже в сайдбаре -->
     <router-link style="font-family: sans-serif" to="/">Первая страница</router-link>
-    <router-link style="font-family: sans-serif" to="/demo">Вторая страница</router-link>
+    <router-link style="font-family: sans-serif" to="/dtc">Вторая страница</router-link>
     <br>
     <router-view></router-view>
 
@@ -99,12 +57,14 @@
           <p class="text-grey">hlopkov-k@schtandart.com</p>
         </div>
         <div class="list no-border">
+
           <a class="item space-small">
             <div class="left">
               <i class="icon ion-ios-heart-outline grey-300"></i>
             </div>
             <h1 class="text-grey-300">ОТК</h1>
           </a>
+
           <a class="item space-small">
             <div class="left">
               <i class="icon ion-ios-flame-outline grey-300"></i>
@@ -114,6 +74,7 @@
               <span class="text-small border-red text-red radius padding">12</span>
             </div>
           </a>
+
           <a class="item space-small">
             <div class="left">
               <i class="icon ion-ios-location-outline grey-300"></i>
@@ -164,16 +125,18 @@
           <h2 class="strong">Konstantin Khlopkov</h2>
           <p class="text-red-400">@kokhlo</p>
           <p class="text-grey">5 минут назад</p>
+          <!--Div class Right-->
           <div class="right">
             <button class="white icon ion-ios-heart-outline text-red-400"> 23</button>
           </div>
+          <!--Div class Right-->
         </div>
         <div class="item full">
           <img src="/img/nature2.jpg" />
         </div>
         <div class="item text-grey-600">
           <p>
-            Smth text.
+            Smth text.            
           </p>
         </div>
       </div>

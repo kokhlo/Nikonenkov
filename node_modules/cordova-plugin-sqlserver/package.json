@@ -1,24 +1,27 @@
 {
-  "_from": "git+https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git",
+  "_from": "cordova-plugin-sqlserver",
   "_id": "cordova-plugin-sqlserver@1.0.0",
   "_inBundle": false,
-  "_integrity": "",
+  "_integrity": "sha1-TbX3BT4WXrV0r9BuHsnhNY6Biy8=",
   "_location": "/cordova-plugin-sqlserver",
   "_phantomChildren": {},
   "_requested": {
-    "type": "git",
-    "raw": "https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git",
-    "rawSpec": "https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git",
-    "saveSpec": "git+https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git",
-    "fetchSpec": "https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git",
-    "gitCommittish": null
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-sqlserver",
+    "name": "cordova-plugin-sqlserver",
+    "escapedName": "cordova-plugin-sqlserver",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git#3a72faa7c89a4fb823d234ceb28f9d526c4d72d6",
-  "_spec": "https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-sqlserver/-/cordova-plugin-sqlserver-1.0.0.tgz",
+  "_shasum": "4db5f7053e165eb574afd06e1ec9e1358e818b2f",
+  "_spec": "cordova-plugin-sqlserver",
   "_where": "C:\\Nikonenkov\\Schtandart",
   "bundleDependencies": false,
   "cordova": {

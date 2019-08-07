@@ -1,6 +1,3 @@
-//
-var SqlServer;
-// Домашняя страница с общей информацией, о пользователе, поиск заказов
 var HomeComponent = Vue.component('home', {
   name: 'Home',
   data: function () {
@@ -14,7 +11,7 @@ var HomeComponent = Vue.component('home', {
     </div>
   `
 })
-// Компонент для ОТК (Выставление статусов и проверки QR сканером)
+
 var RouterComponent = Vue.component('basic', {
   data: function () {
     return {
@@ -23,8 +20,8 @@ var RouterComponent = Vue.component('basic', {
   },
   template: `
     <div>
-      <h1>{{ title }}</h1>
-      <p> Dtc component is available</p>
+      <h1>{{ title }} <span style="color: red"> Dtc component is available</span></h1>
+      
     </div>
   `
 })
@@ -47,3 +44,5 @@ var router = new VueRouter({
 var vueApp = new Vue({
   el: '#app',
   router})
+
+ 

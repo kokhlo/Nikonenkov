@@ -14,8 +14,10 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cordova-android": "^8.0.0",
+    "cordova-browser": "^6.0.0",
     "cordova-plugin-qrscanner": "^3.0.1",
-    "cordova-plugin-sqlserver": "git+https://github.com/SergioDosSantos/cordova-plugin-sqlserver.git"
+    "cordova-plugin-sqlserver": "^1.0.0",
+    "ondone": "^1.0.0"
   },
   "devDependencies": {
     "cordova-plugin-whitelist": "^1.3.4"
@@ -27,7 +29,8 @@
       "cordova-plugin-sqlserver": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
