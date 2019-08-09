@@ -7,7 +7,31 @@ var HomeComponent = Vue.component('home', {
   },
   template: `
     <div>
-      <h1>{{ message }} <span style="color: red">Schtandart🖤</span></h1>
+      <h1>{{ message }}</h1>
+    
+      <div class="list white no-border radius shadow">
+        <div class="item">
+          <div class="left">
+            <img class="avatar radius" src="/img/33.jpg" />
+          </div>
+          <h2 class="strong">Konstantin Khlopkov</h2>
+          <p class="text-red-400">@kokhlo</p>
+          <p class="text-grey">5 минут назад</p>
+          
+          <div class="right">
+            <button class="white icon ion-ios-heart-outline text-red-400"> 23</button>
+          </div>
+          
+        </div>
+        <div class="item full">
+          <img src="/img/nature2.jpg" />
+        </div>
+        <div class="item text-grey-600">
+          <p>
+              <span style="color: red">Schtandart🖤</span>
+          </p>
+        </div>
+      </div>
     </div>
   `
 })
@@ -15,14 +39,35 @@ var HomeComponent = Vue.component('home', {
 var RouterComponent = Vue.component('basic', {
   data: function () {
     return {
-      title: 'You can use VueRouter!'
+      title: 'Qc tab'
     }
   },
   template: `
     <div>
-      <h1>{{ title }} <span style="color: red"> Dtc component is available</span></h1>
-      
+      <h1>{{ title }}</h1>
+      <div class="list white no-border radius shadow">
+        <div class="item">
+          <div class="left">
+            <img class="avatar radius" src="/img/33.jpg" />
+          </div>
+          <h2 class="strong">Konstantin Khlopkov</h2>
+          <p class="text-red-400">@kokhlo</p>
+          <p class="text-grey">Ровно 5 минут назад</p>
+          <div class="right">
+            <button class="white icon ion-ios-heart-outline text-red-400">14</button>
+          </div>
+        </div>
+          <button id="prepare" class="purple small">Prepare</button>
+          <button id="show" class="red small">Show</button>
+          <button id="scan" class="blue small">Scan</button>
+        <div class="item text-grey-600">
+          <p>
+            <span style="color: red"> Qc component is available</span>
+          </p>
+        </div>
+      </div>
     </div>
+      
   `
 })
 
@@ -33,7 +78,7 @@ var router = new VueRouter({
       component: HomeComponent
     },
     {
-      path: '/dtc',
+      path: '/qc',
       component: RouterComponent
     }
   ]
@@ -43,6 +88,7 @@ var router = new VueRouter({
 
 var vueApp = new Vue({
   el: '#app',
-  router})
+  router
+})
 
- 
+

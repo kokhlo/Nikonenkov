@@ -13,23 +13,75 @@
   <!-- Custom -->
   <script src="cordova.js"></script>
   <script type="text/javascript">
-    var onDone;
+
+    // Переменные для добавление в строку запроса к базе "1С"
+    var id, barcodes, value, activate, dt, people;
+
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
+      //this.receivedEvent('deviceready');
+
       alert('Maybe something went wrong or maybe not 0');
-      window.QRScanner.prepare(onDone);
-      alert('Maybe something went wrong or maybe not 1');
-      SqlServer.init("172.16.0.100", "MSSQLSERVER", "sa", "1qaz@WSX", "BD", function (event) {
-        alert(JSON.stringify(event));
-      }, function (error) {
-        alert(JSON.stringify(error));
+
+      document.querySelector("#prepare").addEventListener("touchend", function () {
+        window.QRScanner.prepare(onDone); // show the prompt
+
       });
-      alert('Maybe something went wrong or maybe not 2');
-      window.SqlServer.testConnection(function (event) {
-        alert(JSON.stringify(event));
-      }, function (error) {
-        alert("Error : " + JSON.stringify(error));
+
+      document.querySelector("#show").addEventListener("touchend", function () {
+        window.QRScanner.show();
+
       });
+
+      document.querySelector("#scan").addEventListener("touchend", function () {
+        window.QRScanner.scan(displayContents)});
+
+        function displayContents(err, text) {
+          if (err) {
+            // an error occurred, or the scan was canceled (error code `6`)
+          } else {
+            // The scan completed, display the contents of the QR code:
+            alert(text);
+          }
+        }
+     
+
+    var onDone = function (err, status) {
+      if (err) {
+        alert(err._message);
+      } else {
+        alert('QRScanner is initialized. Status:');
+        alert(status);
+      }
+    };
+
+    window.QRScanner.prepare(onDone);
+    alert('Maybe something went wrong or maybe not 1');
+    SqlServer.init("172.16.0.100", "MSSQLSERVER", "sa", "1qaz@WSX", "schtadart", function (event) {
+      alert(JSON.stringify(event));
+    }, function (error) {
+      alert(JSON.stringify(error));
+    });
+
+    alert('Maybe something went wrong or maybe not 2');
+    window.SqlServer.testConnection(function (event) {
+      alert(JSON.stringify(event));
+    }, function (error) {
+      alert("Error : " + JSON.stringify(error));
+    });
+    alert('Hurraah!');
+    SqlServer.executeQuery("SELECT * FROM [schtadart].[dbo].[scanner] WHERE ", function (event) {
+      alert(JSON.stringify(event));
+    }, function (error) {
+      alert("Error : " + JSON.stringify(error));
+    });
+
+    SqlServer.execute("insert scanner values ('5','2000060910019','1','33','2019-09-08 00:00:00.000','Хлопков Константин Владимирович')", function (event) {
+      alert("Insert complete : " + JSON.stringify(event));
+    }, function (error) {
+      alert("Error : " + JSON.stringify(error));
+    });
+    alert('Hurraah! Fin');
     }
 
   </script>
@@ -40,8 +92,7 @@
 
   <div id="app">
     <!-- Вся навигация находится в сайдбаре, auth будет тоже в сайдбаре, следовательно роутерлинки должны быть тоже в сайдбаре -->
-    <router-link style="font-family: sans-serif" to="/">Первая страница</router-link>
-    <router-link style="font-family: sans-serif" to="/dtc">Вторая страница</router-link>
+
     <br>
     <router-view></router-view>
 
@@ -56,24 +107,25 @@
           <p class="text-grey">hlopkov-k@schtandart.com</p>
         </div>
         <div class="list no-border">
-
-          <a class="item space-small">
-            <div class="left">
-              <i class="icon ion-ios-heart-outline grey-300"></i>
-            </div>
-            <h1 class="text-grey-300">ОТК</h1>
-          </a>
-
-          <a class="item space-small">
-            <div class="left">
-              <i class="icon ion-ios-flame-outline grey-300"></i>
-            </div>
-            <h1 class="text-grey-300">Стеколка</h1>
-            <div class="right">
-              <span class="text-small border-red text-red radius padding">12</span>
-            </div>
-          </a>
-
+          <router-link style="font-family: sans-serif" to="/qc">
+            <a class="item space-small">
+              <div class="left">
+                <i class="icon ion-ios-heart-outline grey-300"></i>
+              </div>
+              <h1 class="text-grey-300">ОТК</h1>
+            </a>
+          </router-link>
+          <router-link style="font-family: sans-serif" to="/">
+            <a class="item space-small">
+              <div class="left">
+                <i class="icon ion-ios-flame-outline grey-300"></i>
+              </div>
+              <h1 class="text-grey-300">Стеколка</h1>
+              <div class="right">
+                <span class="text-small border-red text-red radius padding">12</span>
+              </div>
+            </a>
+          </router-link>
           <a class="item space-small">
             <div class="left">
               <i class="icon ion-ios-location-outline grey-300"></i>
@@ -115,32 +167,7 @@
         </div>
       </div>
       <div class="space"></div>
-      <!-- Список  -->
-      <div class="list white no-border radius shadow">
-        <div class="item">
-          <div class="left">
-            <img class="avatar radius" src="/img/33.jpg" />
-          </div>
-          <h2 class="strong">Konstantin Khlopkov</h2>
-          <p class="text-red-400">@kokhlo</p>
-          <p class="text-grey">5 минут назад</p>
-          <!--Div class Right-->
-          <div class="right">
-            <button class="white icon ion-ios-heart-outline text-red-400"> 23</button>
-          </div>
-          <!--Div class Right-->
-        </div>
-        <div class="item full">
-          <img src="/img/nature2.jpg" />
-        </div>
-        <div class="item text-grey-600">
-          <p>
-            Smth text.            
-          </p>
-        </div>
-      </div>
 
-      <!-- Конец региона -->
     </body>
 
   </div>
