@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "cordova-plugin-qrscanner.QRScanner",
-      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
-      "pluginId": "cordova-plugin-qrscanner",
-      "clobbers": [
-        "QRScanner"
-      ]
-    },
-    {
       "id": "cordova-plugin-sqlserver.plugin",
       "file": "plugins/cordova-plugin-sqlserver/www/plugin.js",
       "pluginId": "cordova-plugin-sqlserver",
@@ -16,11 +8,19 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
         "SqlServer"
       ],
       "runs": true
+    },
+    {
+      "id": "cordova-gmv-barcode-scanner.cordova-gmv-barcode-scanner",
+      "file": "plugins/cordova-gmv-barcode-scanner/www/main.js",
+      "pluginId": "cordova-gmv-barcode-scanner",
+      "clobbers": [
+        "cordova.plugins.gmv-barcode-scanner"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-whitelist": "1.3.4",
-    "cordova-plugin-qrscanner": "3.0.1",
-    "cordova-plugin-sqlserver": "1.0.0"
+    "cordova-plugin-sqlserver": "1.0.0",
+    "cordova-gmv-barcode-scanner": "1.2"
   };
 });

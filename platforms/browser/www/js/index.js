@@ -39,8 +39,34 @@ var HomeComponent = Vue.component('home', {
 var RouterComponent = Vue.component('basic', {
   data: function () {
     return {
-      title: 'Qc tab'
+      title: 'Qc tab',
+      link: 'URL',
+      parsed: 0,
+      info: null
+    }  
+},
+  methods: {
+    getTable: function () {
+      // barcode будет из input`а 
+      // а этот код добавить в метод на онклик по кнопке в qc
+
+      var info;
+      var parsed;
+      window.plugins.GMVBarcodeScanner.scan({}, function (err, result) {
+
+        //Handle Errors
+        if (err) return;
+        var barcodeUrl = 'http://172.16.0.200:81/autogen/oijson/' + result;
+        //Do something with the data.
+        alert(result);
+        axios
+          .get(barcodeUrl)
+          .then(response => (this.info = response));
+        alert(this.info);
+
+      });
     }
+
   },
   template: `
     <div>
@@ -57,9 +83,15 @@ var RouterComponent = Vue.component('basic', {
             <button class="white icon ion-ios-heart-outline text-red-400">14</button>
           </div>
         </div>
+          
+          <p>Введённое сообщение: barcode </p>
+          <button id="getTable" v-on:click="getTable" class="grey small">Get table</button>
+          <br>
           <button id="prepare" class="purple small">Prepare</button>
           <button id="show" class="red small">Show</button>
           <button id="scan" class="blue small">Scan</button>
+          <br>
+          {{info}}
         <div class="item text-grey-600">
           <p>
             <span style="color: red"> Qc component is available</span>
@@ -88,7 +120,19 @@ var router = new VueRouter({
 
 var vueApp = new Vue({
   el: '#app',
-  router
-})
+  router,
+  data() {
+    return {
+      info: null
+    };
+  },
+  mounted() {
+    axios
+      .get('http://172.16.0.200:81/autogen/oijson/2000063673607')
+      .then(response => (this.info = response));
+    alert(this.info);
 
+  }
+
+})
 

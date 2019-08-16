@@ -4,12 +4,12 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="QRScanner">
-        <param name="android-package" value="com.bitpay.cordova.qrscanner.QRScanner" />
-    </feature>
     <feature name="SqlServer">
         <param name="android-package" value="com.y3k.SqlServer" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="cordova-gmv-barcode-scanner">
+        <param name="android-package" value="com.dealrinc.gmvScanner.CDVAndroidScanner" />
     </feature>
     <name>SchtandartApp</name>
     <description>
@@ -27,6 +27,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
+    <icon density="mdpi" src="/www/img/logo.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="DisallowOverscroll" value="true" />
 </widget>

@@ -10,10 +10,10 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-qrscanner": {
+    "cordova-plugin-sqlserver": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-sqlserver": {
+    "cordova-gmv-barcode-scanner": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },

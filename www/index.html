@@ -11,6 +11,7 @@
   <script src="./lib/vue.min.js"></script>
   <script src="./lib/vue-router.min.js"></script>
   <!-- Custom -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="cordova.js"></script>
   <script type="text/javascript">
 
@@ -23,39 +24,7 @@
 
       alert('Maybe something went wrong or maybe not 0');
 
-      document.querySelector("#prepare").addEventListener("touchend", function () {
-        window.QRScanner.prepare(onDone); // show the prompt
-
-      });
-
-      document.querySelector("#show").addEventListener("touchend", function () {
-        window.QRScanner.show();
-
-      });
-
-      document.querySelector("#scan").addEventListener("touchend", function () {
-        window.QRScanner.scan(displayContents)});
-
-        function displayContents(err, text) {
-          if (err) {
-            // an error occurred, or the scan was canceled (error code `6`)
-          } else {
-            // The scan completed, display the contents of the QR code:
-            alert(text);
-          }
-        }
      
-
-    var onDone = function (err, status) {
-      if (err) {
-        alert(err._message);
-      } else {
-        alert('QRScanner is initialized. Status:');
-        alert(status);
-      }
-    };
-
-    window.QRScanner.prepare(onDone);
     alert('Maybe something went wrong or maybe not 1');
     SqlServer.init("172.16.0.100", "MSSQLSERVER", "sa", "1qaz@WSX", "schtadart", function (event) {
       alert(JSON.stringify(event));
@@ -64,11 +33,7 @@
     });
 
     alert('Maybe something went wrong or maybe not 2');
-    window.SqlServer.testConnection(function (event) {
-      alert(JSON.stringify(event));
-    }, function (error) {
-      alert("Error : " + JSON.stringify(error));
-    });
+    
     alert('Hurraah!');
     SqlServer.executeQuery("SELECT * FROM [schtadart].[dbo].[scanner] WHERE ", function (event) {
       alert(JSON.stringify(event));
@@ -153,7 +118,7 @@
         <div class="left">
           <button class="icon ion-navicon-round" onclick="openMenu('menuDiscover')"></button>
         </div>
-        <h1 class="title align-center">Сканер штрихкодов</h1>
+        <h1 class="title align-center">Штандарт лого</h1>
         <div class="right">
           <span class="icon-badge text-small red radius padding">3</span>
           <button class="icon ion-earth"></button>
@@ -161,13 +126,13 @@
       </div>
       <div class="header sub teal">
         <div class="buttons-group full small">
-          <button class="teal-700 border-teal radius-left">Latests</button>
-          <button class="teal-600 border-teal">Favorites</button>
-          <button class="teal-600 border-teal radius-right">All</button>
+          <button class="teal-700 border-teal radius-left">Сканирование</button>
+          <button class="teal-600 border-teal radius-right">Проблемные изделия</button>
         </div>
+        
       </div>
       <div class="space"></div>
-
+      
     </body>
 
   </div>
